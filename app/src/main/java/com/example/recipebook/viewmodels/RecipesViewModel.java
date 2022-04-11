@@ -9,7 +9,7 @@ import androidx.room.Room;
 import com.example.recipebook.database.AppDatabase;
 import com.example.recipebook.models.Recipe;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class RecipesViewModel extends AndroidViewModel {
     private AppDatabase database;
@@ -18,7 +18,7 @@ public class RecipesViewModel extends AndroidViewModel {
         database = Room.databaseBuilder(application, AppDatabase.class, "recipedb").build();
     }
 
-    public void saveRecipe(String name, List<String> ingredients, List<String> steps, String description) {
+    public void saveRecipe(String name, ArrayList<String> ingredients, ArrayList<String> steps, String description) {
         new Thread(() -> {
             Recipe newRecipe = new Recipe();
 

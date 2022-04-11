@@ -3,7 +3,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class Recipe {
@@ -17,10 +17,10 @@ public class Recipe {
     public String description;
 
     @ColumnInfo
-    public List<String> ingredients;
+    public ArrayList<String> ingredients;
 
     @ColumnInfo
-    public List<String> steps;
+    public ArrayList<String> steps;
 
     @ColumnInfo(name = "created_at")
     public long createdAt;
