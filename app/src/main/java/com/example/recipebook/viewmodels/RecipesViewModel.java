@@ -23,6 +23,7 @@ public class RecipesViewModel extends AndroidViewModel {
             Recipe newRecipe = new Recipe();
 
             newRecipe.name = name;
+            newRecipe.description = description;
             newRecipe.ingredients = ingredients;
             newRecipe.steps = steps;
             newRecipe.createdAt = System.currentTimeMillis();

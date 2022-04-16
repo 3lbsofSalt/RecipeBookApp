@@ -8,7 +8,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.recipebook.viewmodels.RecipesViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -20,6 +22,8 @@ public class AddRecipeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_recipe_screen);
+
+        RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
 
         ArrayList<String> ingredientsArrayList = new ArrayList<>();
         ArrayList<String> stepsArrayList = new ArrayList<>();
@@ -84,6 +88,7 @@ public class AddRecipeScreen extends AppCompatActivity {
             String name = nameText.getText().toString();
             String description = descriptionText.getText().toString();
             Intent intent = new Intent(AddRecipeScreen.this, MainActivity.class);
+            viewModel.saveRecipe(name, ingredientsArrayList, stepsArrayList, description);
             startActivity(intent);
         });
     }
