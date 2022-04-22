@@ -1,6 +1,7 @@
 package com.example.recipebook;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,6 +19,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 
 public class AddRecipeScreen extends AppCompatActivity {
+
+    String uriPath = "";
+    TextView imagePath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -88,8 +93,34 @@ public class AddRecipeScreen extends AppCompatActivity {
             String name = nameText.getText().toString();
             String description = descriptionText.getText().toString();
             Intent intent = new Intent(AddRecipeScreen.this, MainActivity.class);
-            viewModel.saveRecipe(name, ingredientsArrayList, stepsArrayList, description);
+            viewModel.saveRecipe(name, uriPath, ingredientsArrayList, stepsArrayList, description);
             startActivity(intent);
         });
+
+        Button imageButton = findViewById(R.id.imageButton);
+        this.imagePath = findViewById(R.id.imagePath);
+
+        // this code is based on code found on https://www.geeksforgeeks.org/how-to-select-an-image-from-gallery-in-android/
+        imageButton.setOnClickListener(view -> {
+            Intent i = new Intent();
+            i.setType("image/*");
+            i.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(i, "Select Picture"), 200);
+        });
+
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if(requestCode == 200) { // 200 is a good status code
+                Uri selectedImageUri = data.getData();
+                if(null != selectedImageUri) {
+                    uriPath = selectedImageUri.getPath();
+                    this.imagePath.setText(uriPath);
+                }
+            }
+        }
     }
 }
