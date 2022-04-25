@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Room;
 
 import com.example.recipebook.database.AppDatabase;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class RecipesViewModel extends AndroidViewModel {
     private AppDatabase database;
+    private MutableLiveData<Recipe> currentRecipe = new MutableLiveData<>();
     public RecipesViewModel(@NonNull Application application) {
         super(application);
         database = Room.databaseBuilder(application, AppDatabase.class, "recipedb").build();
@@ -31,5 +33,13 @@ public class RecipesViewModel extends AndroidViewModel {
             newRecipe.id = database.getRecipesDao().insert(newRecipe);
         }).start();
 
+    }
+
+    public MutableLiveData<Recipe> getCurrentRecipe() {
+        return currentRecipe;
+    }
+
+    public void setCurrentRecipe(Recipe recipe) {
+        this.currentRecipe.setValue(recipe);
     }
 }
