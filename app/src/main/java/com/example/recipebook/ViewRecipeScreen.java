@@ -1,6 +1,7 @@
 package com.example.recipebook;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.recipebook.viewmodels.RecipesViewModel;
+
+import java.io.File;
 
 public class ViewRecipeScreen extends AppCompatActivity {
 
@@ -28,8 +31,14 @@ public class ViewRecipeScreen extends AppCompatActivity {
         viewModel.getSingleRecipe(recipe_id).observe(this, (recipe) -> {
             if(!recipe.imagePath.isEmpty()) {
                 ImageView image = findViewById(R.id.imageView);
-                Uri photo = Uri.parse(recipe.imagePath);
-                image.setImageURI(photo);
+                //Uri photo = Uri.parse("content:/" + recipe.imagePath);
+
+                File myPath = new File(recipe.imagePath);
+
+                Log.d("aorstn", "eioarsntoar");
+
+                //image.setImageURI(photo);
+                image.setImageDrawable(Drawable.createFromPath(myPath.toString()));
             }
 
             TextView name = findViewById(R.id.recipe_name);
