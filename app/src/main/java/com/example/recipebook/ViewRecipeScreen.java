@@ -28,7 +28,8 @@ public class ViewRecipeScreen extends AppCompatActivity {
         viewModel.getSingleRecipe(recipe_id).observe(this, (recipe) -> {
             if(!recipe.imagePath.isEmpty()) {
                 ImageView image = findViewById(R.id.imageView);
-                image.setImageURI(Uri.parse(recipe.imagePath));
+                Uri photo = Uri.parse(recipe.imagePath);
+                image.setImageURI(photo);
             }
 
             TextView name = findViewById(R.id.recipe_name);
