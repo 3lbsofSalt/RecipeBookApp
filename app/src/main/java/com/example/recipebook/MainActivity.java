@@ -1,6 +1,7 @@
 package com.example.recipebook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.recipebook.models.Recipe;
 import com.example.recipebook.viewmodels.RecipeAdapter;
+import com.example.recipebook.viewmodels.RecipesViewModel;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,7 +33,14 @@ public class MainActivity extends AppCompatActivity {
         ExtendedFloatingActionButton addRecipeButton = findViewById(R.id.add_recipe_button);
         RecyclerView recyclerView = findViewById(R.id.recipe_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RecipeAdapter(recipes));
+
+        RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
+        recyclerView.setAdapter(new RecipeAdapter(recipes,
+                entry -> {
+            viewModel.setCurrentRecipe(entry);
+            Intent intent = new Intent(MainActivity.this, ViewRecipeScreen.class);
+            startActivity(intent);
+                }));
 
         addRecipeButton.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddRecipeScreen.class);
