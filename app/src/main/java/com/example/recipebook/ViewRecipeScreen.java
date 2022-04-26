@@ -3,6 +3,7 @@ package com.example.recipebook;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,10 +22,10 @@ public class ViewRecipeScreen extends AppCompatActivity {
         setContentView(R.layout.view_recipe_screen);
 
         Intent intent = getIntent();
-        String recipe_id = intent.getStringExtra("recipe_id");
+        long recipe_id = intent.getLongExtra("recipe_id", 1);
 
         RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
-        viewModel.getSingleRecipe(Integer.parseInt(recipe_id)).observe(this, (recipe) -> {
+        viewModel.getSingleRecipe(recipe_id).observe(this, (recipe) -> {
             if(!recipe.imagePath.isEmpty()) {
                 ImageView image = findViewById(R.id.imageView);
                 image.setImageURI(Uri.parse(recipe.imagePath));

@@ -52,7 +52,7 @@ public class RecipesViewModel extends AndroidViewModel {
         return recipes;
     }
 
-    public MutableLiveData<Recipe> getSingleRecipe(int id) {
+    public MutableLiveData<Recipe> getSingleRecipe(long id) {
         new Thread(() -> {
             Recipe recipe = database.getRecipesDao().findById(id);
             handler.post(() -> {
