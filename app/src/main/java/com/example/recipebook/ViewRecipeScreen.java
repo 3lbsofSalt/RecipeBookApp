@@ -1,5 +1,6 @@
 package com.example.recipebook;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -19,8 +20,11 @@ public class ViewRecipeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_recipe_screen);
 
+        Intent intent = getIntent();
+        String recipe_id = intent.getStringExtra("recipe_id");
+
         RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
-        viewModel.getCurrentRecipe().observe(this, (recipe) -> {
+        viewModel.getSingleRecipe(Integer.parseInt(recipe_id)).observe(this, (recipe) -> {
             if(!recipe.imagePath.isEmpty()) {
                 ImageView image = findViewById(R.id.imageView);
                 image.setImageURI(Uri.parse(recipe.imagePath));
@@ -48,7 +52,6 @@ public class ViewRecipeScreen extends AppCompatActivity {
             stepsAdapter = new ArrayAdapter<>(getApplicationContext(),
                     android.R.layout.simple_list_item_1, recipe.steps);
             stepsList.setAdapter(stepsAdapter);
-
 
         });
     }
