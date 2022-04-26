@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             entry -> {
                 viewModel.setCurrentRecipe(entry);
                 Intent intent = new Intent(MainActivity.this, ViewRecipeScreen.class);
+                intent.putExtra("recipe_id", entry.id);
                 startActivity(intent);
             });
         recipes.addOnListChangedCallback(new ObservableList.OnListChangedCallback() {
