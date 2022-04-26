@@ -1,6 +1,8 @@
 package com.example.recipebook.viewmodels;
 
 import android.app.Application;
+import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
@@ -16,10 +18,19 @@ import java.util.ArrayList;
 public class RecipesViewModel extends AndroidViewModel {
     private AppDatabase database;
     private MutableLiveData<Recipe> currentRecipe = new MutableLiveData<>();
+    private ObservableArrayList<Recipe> recipes = new ObservableArrayList<>();
+    private Handler handler;
 
     public RecipesViewModel(@NonNull Application application) {
         super(application);
+        handler = new Handler();
         database = Room.databaseBuilder(application, AppDatabase.class, "recipedb").build();
+        new Thread(() -> {
+            ArrayList<Recipe> theRecipes = (ArrayList<Recipe>) database.getRecipesDao().getAll();
+            handler.post(() -> {
+                recipes.addAll(theRecipes);
+            });
+        }).start();
     }
 
     public void saveRecipe(String name, String imagePath, ArrayList<String> ingredients, ArrayList<String> steps, String description) {
@@ -35,6 +46,10 @@ public class RecipesViewModel extends AndroidViewModel {
             newRecipe.id = database.getRecipesDao().insert(newRecipe);
         }).start();
 
+    }
+
+    public ObservableArrayList<Recipe> getRecipes() {
+        return recipes;
     }
 
     public MutableLiveData<Recipe> getCurrentRecipe() {

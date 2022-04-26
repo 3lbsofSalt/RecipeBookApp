@@ -13,13 +13,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.recipebook.viewmodels.RecipesViewModel;
 
 public class ViewRecipeScreen extends AppCompatActivity {
-    RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_recipe_screen);
 
+        RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
         viewModel.getCurrentRecipe().observe(this, (recipe) -> {
             if(!recipe.imagePath.isEmpty()) {
                 ImageView image = findViewById(R.id.imageView);
