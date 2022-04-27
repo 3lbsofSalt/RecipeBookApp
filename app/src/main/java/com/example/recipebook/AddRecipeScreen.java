@@ -97,17 +97,6 @@ public class AddRecipeScreen extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button imageButton = findViewById(R.id.imageButton);
-        this.imagePath = findViewById(R.id.imagePath);
-
-        // this code is based on code found on https://www.geeksforgeeks.org/how-to-select-an-image-from-gallery-in-android/
-        imageButton.setOnClickListener(view -> {
-            Intent i = new Intent();
-            i.setType("image/*");
-            i.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(i, "Select Picture"), 200);
-        });
-
     }
 
 
