@@ -14,9 +14,6 @@ public class Recipe {
     public String name;
 
     @ColumnInfo
-    public String imagePath;
-
-    @ColumnInfo
     public String description;
 
     @ColumnInfo

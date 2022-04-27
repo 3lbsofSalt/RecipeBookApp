@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.recipebook.viewmodels.RecipesViewModel;
@@ -23,11 +24,6 @@ import com.example.recipebook.viewmodels.RecipesViewModel;
 import java.io.File;
 
 public class ViewRecipeScreen extends AppCompatActivity {
-
-    private boolean checkIfAlreadyhavePermission() {
-        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        return result == PackageManager.PERMISSION_GRANTED;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +35,6 @@ public class ViewRecipeScreen extends AppCompatActivity {
 
         RecipesViewModel viewModel = new ViewModelProvider(this).get(RecipesViewModel.class);
         viewModel.getSingleRecipe(recipe_id).observe(this, (recipe) -> {
-            if(!recipe.imagePath.isEmpty()) {
-                ImageView image = findViewById(R.id.imageView);
-                //Uri photo = Uri.parse("content:/" + recipe.imagePath);
-
-                File myPath = new File(recipe.imagePath);
-                Uri photo = Uri.fromFile(myPath);
-
-                if(myPath.exists()) {
-                    Log.d("aorstn", "eioarsntoar");
-                }
-
-                image.setImageURI(photo);
-
-                //Bitmap bm = BitmapFactory.decodeFile(myPath.getPath());
-                //image.setImageDrawable(Drawable.createFromPath(myPath.getPath()));
-                //image.setImageBitmap(bm);
-            }
-
             TextView name = findViewById(R.id.recipe_name);
             name.setText(recipe.name);
 

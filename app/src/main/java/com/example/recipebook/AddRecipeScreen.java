@@ -94,10 +94,14 @@ public class AddRecipeScreen extends AppCompatActivity {
             String name = nameText.getText().toString();
             String description = descriptionText.getText().toString();
             Intent intent = new Intent(AddRecipeScreen.this, MainActivity.class);
-            viewModel.saveRecipe(name, uriPath, ingredientsArrayList, stepsArrayList, description);
+            viewModel.saveRecipe(name, ingredientsArrayList, stepsArrayList, description);
             startActivity(intent);
         });
 
+        /*
+         * TODO: This works, but hours of experience says that
+         * displaying an image from internal storage is more work than its worth
+         * at this point.
         Button imageButton = findViewById(R.id.imageButton);
         this.imagePath = findViewById(R.id.imagePath);
 
@@ -108,10 +112,12 @@ public class AddRecipeScreen extends AppCompatActivity {
             i.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(i, "Select Picture"), 200);
         });
+        */
 
     }
 
 
+/*
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
@@ -125,4 +131,5 @@ public class AddRecipeScreen extends AppCompatActivity {
             }
         }
     }
+    */
 }
