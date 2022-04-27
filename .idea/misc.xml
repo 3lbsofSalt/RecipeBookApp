@@ -4,13 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/13853/AndroidStudioProjects/RecipeBook/app/src/main/res/layout/activity_main.xml" value="0.1490036231884058" />
-<<<<<<< HEAD
-        <entry key="..\:/Users/13853/AndroidStudioProjects/RecipeBook/app/src/main/res/layout/add_recipe_screen.xml" value="0.15" />
-=======
         <entry key="..\:/Users/13853/AndroidStudioProjects/RecipeBook/app/src/main/res/layout/add_recipe_screen.xml" value="0.17916666666666667" />
->>>>>>> aaa62f4833ff7217f23e480cf967b4c4df1ae5c8
         <entry key="..\:/Users/13853/AndroidStudioProjects/RecipeBook/app/src/main/res/layout/recipe_item.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/13853/AndroidStudioProjects/RecipeBook/app/src/main/res/layout/view_recipe_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.136" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.15534420289855072" />
       </map>
     </option>
