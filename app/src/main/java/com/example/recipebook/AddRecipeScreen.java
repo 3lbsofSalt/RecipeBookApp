@@ -3,6 +3,7 @@ package com.example.recipebook;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -93,13 +94,30 @@ public class AddRecipeScreen extends AppCompatActivity {
             String name = nameText.getText().toString();
             String description = descriptionText.getText().toString();
             Intent intent = new Intent(AddRecipeScreen.this, MainActivity.class);
-            viewModel.saveRecipe(name, uriPath, ingredientsArrayList, stepsArrayList, description);
+            viewModel.saveRecipe(name, ingredientsArrayList, stepsArrayList, description);
             startActivity(intent);
         });
+
+        /*
+         * TODO: This works, but hours of experience says that
+         * displaying an image from internal storage is more work than its worth
+         * at this point.
+        Button imageButton = findViewById(R.id.imageButton);
+        this.imagePath = findViewById(R.id.imagePath);
+
+        // this code is based on code found on https://www.geeksforgeeks.org/how-to-select-an-image-from-gallery-in-android/
+        imageButton.setOnClickListener(view -> {
+            Intent i = new Intent();
+            i.setType("image/*");
+            i.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(i, "Select Picture"), 200);
+        });
+        */
 
     }
 
 
+/*
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
@@ -107,9 +125,11 @@ public class AddRecipeScreen extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 if(null != selectedImageUri) {
                     uriPath = selectedImageUri.getPath();
+                    Log.d("URI", uriPath);
                     this.imagePath.setText(uriPath);
                 }
             }
         }
     }
+    */
 }

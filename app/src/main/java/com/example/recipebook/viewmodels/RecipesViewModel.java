@@ -33,12 +33,11 @@ public class RecipesViewModel extends AndroidViewModel {
         }).start();
     }
 
-    public void saveRecipe(String name, String imagePath, ArrayList<String> ingredients, ArrayList<String> steps, String description) {
+    public void saveRecipe(String name, ArrayList<String> ingredients, ArrayList<String> steps, String description) {
         new Thread(() -> {
             Recipe newRecipe = new Recipe();
 
             newRecipe.name = name;
-            newRecipe.imagePath = imagePath;
             newRecipe.description = description;
             newRecipe.ingredients = ingredients;
             newRecipe.steps = steps;
