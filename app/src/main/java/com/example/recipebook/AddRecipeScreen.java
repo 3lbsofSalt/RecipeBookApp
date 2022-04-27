@@ -3,6 +3,7 @@ package com.example.recipebook;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -118,6 +119,7 @@ public class AddRecipeScreen extends AppCompatActivity {
                 Uri selectedImageUri = data.getData();
                 if(null != selectedImageUri) {
                     uriPath = selectedImageUri.getPath();
+                    Log.d("URI", uriPath);
                     this.imagePath.setText(uriPath);
                 }
             }

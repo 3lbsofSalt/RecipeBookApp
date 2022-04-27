@@ -1,6 +1,10 @@
 package com.example.recipebook;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.recipebook.viewmodels.RecipesViewModel;
@@ -18,6 +23,11 @@ import com.example.recipebook.viewmodels.RecipesViewModel;
 import java.io.File;
 
 public class ViewRecipeScreen extends AppCompatActivity {
+
+    private boolean checkIfAlreadyhavePermission() {
+        int result = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +44,17 @@ public class ViewRecipeScreen extends AppCompatActivity {
                 //Uri photo = Uri.parse("content:/" + recipe.imagePath);
 
                 File myPath = new File(recipe.imagePath);
+                Uri photo = Uri.fromFile(myPath);
 
-                Log.d("aorstn", "eioarsntoar");
+                if(myPath.exists()) {
+                    Log.d("aorstn", "eioarsntoar");
+                }
 
-                //image.setImageURI(photo);
-                image.setImageDrawable(Drawable.createFromPath(myPath.toString()));
+                image.setImageURI(photo);
+
+                //Bitmap bm = BitmapFactory.decodeFile(myPath.getPath());
+                //image.setImageDrawable(Drawable.createFromPath(myPath.getPath()));
+                //image.setImageBitmap(bm);
             }
 
             TextView name = findViewById(R.id.recipe_name);
